@@ -1,0 +1,7 @@
+streamlit
+python-dotenv
+requests
+playwright
+langchain
+langchain-google-genai
+browser_use
