@@ -1,77 +1,113 @@
-# Tech Speaker Extractor & Enricher
+# Tech Speaker Extractor and Enricher
 
-This app extracts speaker information from event/conference web pages, enriches their profiles using web search and AI, and helps automate LinkedIn outreach.
+This app extracts speaker information from event/conference web pages, enriches their profiles using web search and LLMs, and helps automate LinkedIn outreach.
 
 ## Features
 
-- Extracts speaker names and titles from a given URL.
-- Enriches speaker profiles with summaries, achievements, links, and outreach messages using AI and web search.
-- Lets you review, edit, and send outreach messages via LinkedIn using a browser automation agent.
-- Supports uploading and downloading enriched speaker JSON files.
+- Extract speakers (name, title) from a given URL using browser automation and LLMs.
+- Enrich speaker profiles with web search, summaries, achievements, and outreach messages.
+- Approve and automate LinkedIn outreach via a browser agent.
+- Streamlit UI for easy interaction.
 
-## Setup
+---
 
-1. **Clone or Download the Repository**
+## Setup Instructions
 
-2. **Create and Activate a Virtual Environment**
-   ```bash
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On Mac/Linux:
-   source venv/bin/activate
-   ```
+### 1. Clone or Download the Repository
 
-3. **Install Python dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+git clone https://github.com/dshathwikr/Project.git
+cd Project
+```
 
-4. **Install Playwright Browsers**
-   ```bash
-   playwright install
-   ```
+### 2. Install Python (3.9+ recommended)
 
-5. **Set up your `.env` file**
+Ensure Python is installed and available in your PATH.
 
-   Copy `.env` and fill in:
-   - `GOOGLE_API_KEY` (for Gemini/Google GenAI)
-   - `SERPER_API_KEY` (get from [serper.dev](https://serper.dev/))
-   - `USER_AGENT` (default is fine)
-   - `CHROME_PROFILE_PATH` (path to your Chrome user profile for persistent login)
+### 3. Create and Activate a Virtual Environment (optional but recommended)
 
-6. **(Optional) Log in to LinkedIn in your Chrome profile**
-   - Open Chrome with the profile path in `CHROME_PROFILE_PATH` and log in to LinkedIn.
+```bash
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
 
-## Usage
+### 4. Install Dependencies
 
-1. **Start the Streamlit app**
-   ```bash
-   streamlit run app.py
-   ```
+Install all required packages using `requirements.txt`:
 
-2. **Extract & Enrich Speakers**
-   - Enter a URL of a speakers page and click "Extract & Enrich".
-   - Or upload an existing `speakers_info.json` file.
+```bash
+pip install -r requirements.txt
+```
 
-3. **Review and Outreach**
-   - Review and edit the enriched speaker profiles and outreach messages.
-   - Click "Approve and Send on LinkedIn" to automate outreach (requires LinkedIn login in your Chrome profile).
+**Install Playwright browsers:**
 
-4. **Save or Download**
-   - Save updated results or download the enriched JSON.
+```bash
+playwright install
+```
+
+### 5. Configure API Keys using `.env`
+
+Create a `.env` file in the project directory with the following content:
+
+```
+GOOGLE_API_KEY=your_google_api_key_here
+SERPER_API_KEY=your_serper_api_key_here
+```
+
+- **Google API Key**: For Gemini LLM (https://makersuite.google.com/app/apikey)
+- **Serper API Key**: For Google Search (https://serper.dev)
+
+The app will automatically load these keys.
+
+### 6. Chrome Profile Path
+
+- For browser automation, specify a Chrome user profile directory (e.g., `C:\Users\<user>\AppData\Local\Google\Chrome\User Data\Profile 1`).
+- You can use the default or create a new one for this app.
+
+---
+
+## Running the App
+
+```bash
+streamlit run app.py
+```
+
+- Open the provided local URL in your browser.
+- Enter your Chrome profile path in the sidebar.
+- Enter a speaker page URL or upload a JSON file to start.
+
+---
 
 ## Notes
 
-- The app uses Google Gemini (via `langchain-google-genai`) and Serper.dev for AI and search.
-- Browser automation for LinkedIn uses your local Chrome profile for authentication.
-- For best results, ensure your Chrome profile is logged in to LinkedIn.
+- The app uses Playwright for browser automation. The first run may take longer as browsers are installed.
+- For LinkedIn outreach, you may need to log in manually when prompted.
+- All data is saved locally as `speakers.json`, `speakers_info.json`, and `speakers_info_updated.json`.
+
+---
 
 ## Troubleshooting
 
-- If browser automation fails, check your `CHROME_PROFILE_PATH` and ensure Chrome is not running in the background.
-- If extraction/enrichment fails, check your API keys and internet connection.
+- **Playwright errors**: Ensure browsers are installed (`playwright install`).
+- **API errors**: Double-check your API keys and quotas in `.env`.
+- **Chrome profile issues**: Make sure the path is correct and not in use by another Chrome instance.
+
+---
 
 ## License
 
-For internal/demo use only.
+MIT License
+
+---
+
+## Credits
+
+- [LangChain](https://github.com/langchain-ai/langchain)
+- [Google Gemini](https://ai.google.dev/)
+- [Serper.dev](https://serper.dev/)
+- [Playwright](https://playwright.dev/)
+- [Serper.dev](https://serper.dev/)
+- [Playwright](https://playwright.dev/)
